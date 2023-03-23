@@ -22,7 +22,7 @@ def contact():
     return render_template("contact.html")
 
 @app.route("/careers")
-def contact():
+def careers():
     return render_template("careers.html")
 
 # main is the name of inbuilt module in Python, but we don't import it
