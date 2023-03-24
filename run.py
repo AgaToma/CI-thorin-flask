@@ -21,9 +21,22 @@ def about():
     return render_template("about.html", page_title="About", company=data)
 
 
+@app.route("/about/<member_name>")
+def about_member(member_name):
+    member = {}
+    with open("data/company.json", "r") as json_data:
+        data = json.load(json_data)
+        for obj in data:
+            if obj["url"] == member_name:
+                member = obj
+    # first member is variable passed to html, second is the member object
+    return render_template("member.html", member=member)
+
+
 @app.route("/contact")
 def contact():
     return render_template("contact.html", page_title="Contact")
+
 
 @app.route("/careers")
 def careers():
@@ -33,6 +46,8 @@ def careers():
 # we use os module to get IP environ variable if it exists
 # 5000 is a common port used by Flask
 # debug should only be set to True during development, never in production/when sending for assessment
+
+
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
