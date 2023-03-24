@@ -14,16 +14,16 @@ def index():
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return render_template("about.html", page_title="About", list_of_numbers=[1, 2, 3])
 
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", page_title="Contact")
 
 @app.route("/careers")
 def careers():
-    return render_template("careers.html")
+    return render_template("careers.html", page_title="Careers")
 
 # main is the name of inbuilt module in Python, but we don't import it
 # we use os module to get IP environ variable if it exists
