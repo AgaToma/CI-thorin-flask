@@ -1,10 +1,13 @@
 import os
 import json
 # import Flask class from flask module
-from flask import Flask, render_template
+from flask import Flask, render_template, request, flash
+if os.path.exists("env.py"):
+    import env
 
 # create instance of the the class and store in a variable
 app = Flask(__name__)
+app.secret.key = os.environ.get("SECRET_KEY")
 
 # thanks to the decorator when we browse to root directory flask tiggers index function
 # this function is called view
@@ -33,8 +36,11 @@ def about_member(member_name):
     return render_template("member.html", member=member)
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == "POST":
+        flash("Thanks {}, we have received your messahe".format(
+            request.form.get("name")))
     return render_template("contact.html", page_title="Contact")
 
 
